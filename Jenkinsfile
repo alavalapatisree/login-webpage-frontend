@@ -46,12 +46,17 @@ pipeline {
         stage('Deploy to Tomcat') {
             steps {
                 script {
-                    // Deploy the WAR file to Tomcat
-                    bat 'curl -v --user admin:admin --upload-file build/front-end.war http://localhost:8081/manager/text/deploy?path=/front-end'
-                }
-            }
+                    def tomcatUrl = 'http://localhost:8080'  // Update the URL if your Tomcat is running on a different port
+                    def tomcatManagerUser = 'admin'  // Update with your Tomcat manager username
+                    def tomcatManagerPassword = 'admin'  // Update with your Tomcat manager password
+                    def warFileName = 'front-end.war'  // Update with the actual WAR file name
+
+                    // Deploy the WAR file to Tomcat using the manager API
+                    sh "curl -v --user ${tomcatManagerUser}:${tomcatManagerPassword} --upload-file build/${warFileName} ${tomcatUrl}/manager/text/deploy?path=/front-end"
         }
     }
+}
+
 
     post {
         always {
