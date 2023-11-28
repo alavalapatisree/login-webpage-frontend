@@ -1,51 +1,49 @@
 pipeline {
-    agent {
-        label 'windows'
-    }
-
-    tools {
-        nodejs 'NodeJS'
-    }
+    agent any
 
     stages {
         stage('Checkout') {
             steps {
-                // Checkout source code from GitHub
-                git branch: 'main', url: 'https://github.com/SwathiIndla/login-webpage-frontend.git'
+                script {
+                    // Checkout the code from the specified Git repository
+                    checkout scm
+                }
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                // Install Node.js dependencies
-                bat 'npm install'
+                script {
+                    // You may need to adjust the following commands based on your project's dependencies
+                    bat 'npm install'
+                }
             }
         }
 
         stage('Build') {
             steps {
-                // Build the React application
-                bat 'npm run build'
+                script {
+                    // You may need to adjust the following commands based on your build process
+                    bat 'npm run build'
+                }
             }
         }
 
         stage('Deploy') {
             steps {
-                // Perform deployment steps
-                echo 'Deploying the application'
-                // Example: bat 'xcopy /S /Y build\* C:\path\to\your\deployment\directory'
+                script {
+                    // You may need to adjust the following commands based on your deployment process
+                    // For example, copying files to a server or deploying to a cloud platform
+                    // bat 'your-deployment-command'
+                }
             }
         }
     }
 
     post {
-        success {
-            // Actions to perform on successful pipeline execution
-            echo 'Pipeline executed successfully!'
-        }
         failure {
-            // Actions to perform if the pipeline fails
             echo 'Pipeline failed!'
+            // Additional actions to take on failure if needed
         }
     }
 }
