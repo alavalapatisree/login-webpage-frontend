@@ -48,7 +48,7 @@ pipeline {
             steps {
                 script {
                     // Copy the WAR file to Tomcat webapps directory
-                    def tomcatWebapps = 'C:/path/to/tomcat/webapps'
+                    def tomcatWebapps = 'C:/Program Files/Apache Software Foundation/Tomcat 9.0/webapps'
                     bat "copy front-end.war ${tomcatWebapps}"
                 }
             }
