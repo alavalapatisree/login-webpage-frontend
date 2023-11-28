@@ -9,7 +9,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout source code from GitHub
-                git branch: 'main', credentialsId: 'e752a75c-2aec-40db-a72b-494c11dc6bc2', url: 'https://github.com/SwathiIndla/login-webpage-frontend.git'
+                git branch: 'main', url: 'https://github.com/SwathiIndla/login-webpage-frontend.git'
             }
         }
 
