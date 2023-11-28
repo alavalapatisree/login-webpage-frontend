@@ -38,7 +38,6 @@ pipeline {
             steps {
                 script {
                     // Create a WAR file for deployment
-                    sh 'npm run build'
                     sh 'jar -cvf ${WAR_FILE} -C path/to/your/app .'
                 }
             }
@@ -49,6 +48,7 @@ pipeline {
                 script {
                     // Deploy the WAR file to Tomcat
                     sh "curl -v --upload-file ${WAR_FILE} ${TOMCAT_URL}/manager/text/deploy?path=/${APP_NAME}"
+                    sh 'curl -v --user admin:admin --upload-file build/front-end.war http://localhost:8081/manager/text/deploy?path=/front-end'
                 }
             }
         }
