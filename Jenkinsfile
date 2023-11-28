@@ -53,11 +53,10 @@ pipeline {
 
                     // Deploy the WAR file to Tomcat using the manager API
                     sh "curl -v --user ${tomcatManagerUser}:${tomcatManagerPassword} --upload-file build/${warFileName} ${tomcatUrl}/manager/text/deploy?path=/front-end"
+            }
         }
     }
 }
-
-
     post {
         always {
             // Clean up after the build
