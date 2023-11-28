@@ -23,6 +23,11 @@ pipeline {
                 script {
                     // Your build steps (e.g., npm install) go here
                     // Example: sh 'npm install'
+                    // Install Node.js and npm
+                    bat 'npm install'
+
+                    // Build and test your Node.js application
+                    bat 'npm run build'
                 }
             }
         }
@@ -41,7 +46,7 @@ pipeline {
             steps {
                 script {
                     // Deploy the WAR file to Tomcat
-                    sh "curl -v --user ${TOMCAT_USER}:${TOMCAT_PASS} --upload-file ${WAR_FILE} ${TOMCAT_URL}/manager/text/deploy?path=/${APP_NAME}"
+                    sh "curl -v --upload-file ${WAR_FILE} ${TOMCAT_URL}/manager/text/deploy?path=/${APP_NAME}"
                 }
             }
         }
