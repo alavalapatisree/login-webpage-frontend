@@ -1,47 +1,34 @@
 pipeline {
     agent any
 
-    environment {
-        npm = bat(script: 'where npm', returnStatus: true).trim()
-    }
-
     stages {
         stage('Checkout') {
             steps {
-                script {
-                    checkout scm
-                }
+                // Checkout the source code from Git
+                checkout scm
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Build and Test') {
             steps {
-                script {
-                    bat "${npm} install"
-                }
-            }
-        }
+                // Install Node.js and npm
+                bat 'npm install'
 
-        stage('Build') {
-            steps {
-                script {
-                    bat "${npm} run build"
-                }
+                // Build and test your Node.js application
+                bat 'npm run build'
             }
         }
 
         stage('Deploy') {
             steps {
-                script {
-                    // Add your deployment steps here
-                }
+                // Your deployment steps (if any)
             }
         }
     }
 
     post {
-        failure {
-            echo 'Pipeline failed!'
+        always {
+            // Cleanup steps, if any
         }
     }
 }
