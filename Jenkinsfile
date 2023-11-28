@@ -22,6 +22,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 // Your deployment steps (if any)
+                echo 'this id deploy'
             }
         }
     }
@@ -29,6 +30,7 @@ pipeline {
     post {
         always {
             // Cleanup steps, if any
+            echo 'this is post'
         }
     }
 }
