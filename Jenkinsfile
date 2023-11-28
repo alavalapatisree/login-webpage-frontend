@@ -38,7 +38,8 @@ pipeline {
             steps {
                 script {
                     // Create a WAR file for deployment
-                    bat 'jar -cvf ${WAR_FILE} -C path/to/your/app .'
+                    bat "C:\Program Files\Java\jdk-17\bin\jar -cvf ${WAR_FILE} -C path/to/your/app ."
+
                 }
             }
         }
