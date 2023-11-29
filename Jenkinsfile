@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
- tools {
+    tools {
         nodejs 'nodejs'
     }
 
@@ -39,25 +39,29 @@ pipeline {
                 script {
                     // Create a WAR file for deployment
                     bat "\"C:\\Program Files\\Java\\jdk-17\\bin\\jar\" -cvf front-end.war -C build ."
-
-
                 }
             }
         }
+
         stage('Deploy to Tomcat') {
             steps {
                 script {
+                    // Print the workspace and WAR file path for debugging
+                    echo "Workspace Path: ${env.WORKSPACE}"
+                    echo "WAR File Path: ${env.WORKSPACE}\\${WAR_FILE}"
+
                     // Copy the WAR file to Tomcat webapps directory
                     def tomcatWebapps = 'C:/Program Files/Apache Software Foundation/Tomcat 9.0/webapps'
-                    bat "copy front-end.war \"${tomcatWebapps}\""
-
+                    echo "Copying WAR file to: ${tomcatWebapps}"
+                    bat "copy ${WAR_FILE} \"${tomcatWebapps}\""
                 }
             }
         }
     }
+
     post {
-            always {
-                echo 'This will always run'
-            }
+        always {
+            echo 'This will always run'
         }
+    }
 }
