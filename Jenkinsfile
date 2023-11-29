@@ -7,8 +7,8 @@ pipeline {
 
     environment {
         TOMCAT_URL = 'http://localhost:8081'  // Replace with your Tomcat URL
-        TOMCAT_USER = 'admin'
-        TOMCAT_PASS = 'admin'
+        TOMCAT_USER = 'rupasree'
+        TOMCAT_PASS = 'Roopa8030*'
         APP_NAME = 'front-end'           // Replace with your Node.js application name
         WAR_FILE = "${APP_NAME}.war"
     }
@@ -58,7 +58,6 @@ pipeline {
 }
     post {
         always {
-            // Clean up after the build
-            cleanWs()
+            echo 'This will always run'
         }
     }
